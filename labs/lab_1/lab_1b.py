@@ -37,14 +37,43 @@ def simple_calculator(operation: str, num1: float, num2: float) -> float:
     else:
         raise ValueError("Invalid operation. Please choose from 'add', 'subtract', 'multiply', or 'divide'.")
 
+def request_santized_number(prompt: str) -> float:
+   """
+   Function to request and santinize user input for number to operate 
+
+   Returns:
+        float: The santinized numric input by the user.
+   """ 
+   while True:
+       try:
+           number = float(input(prompt))
+           return number
+       except ValueError:
+           print(f"Invalid input: Please enter a valid number")
+
+def request_santized_operation() -> str:
+   """
+   Function to request and santinize user input for operation
+
+   Returns:
+        float: The santinized str input by the user.
+   """ 
+   operation_set = {'add','subtract','multiply','divide'}
+   while True:
+           operation = input("Enter the operation (add, subtract, multiply, divide): ").strip().lower()
+           if operation in operation_set:
+               return operation 
+           else:
+               print(f"Invalid operation. Please choose from 'add', 'subtract', 'multiply', or 'divide'")
+
 def main():
     
     print(f"===== Simple Calculator =====")
 
     # Ask the user for sample input    
-    num1 = float(input("Enter the first number: "))
-    num2 = float(input("Enter the second number: "))
-    operation = input("Enter the operation (add, subtract, multiply, divide): ").strip().lower()
+    num1 = float(request_santized_number("Enter the first number: "))
+    num2 = float(request_santized_number("Enter the second number: "))
+    operation = request_santized_operation() 
 
     # Perform the calculation and display the result
     result = simple_calculator(operation, num1, num2)
